@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'image/logo.png' %}" alt="Logo img">
+            <h1><a href="{% url 'home' %}" style="text-decoration: none; color: black;">LiktY</a></h1>
+        </div>
+        <div class="account">
+            <a href="{% url 'shopping_cart' %}"><img src="{% static 'image/free-icon-font-shopping-cart (2).png' %}" alt="account" style="width: 30px;"></a>
+            <a href="{% url 'account' %}"><img src="{% static 'image/user (1).png' %}" alt="account" style="width: 30px; margin-left: 5px;"></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="{% url 'about_us' %}">About us</a></li>
+                <li><a href="{% url 'from_sellers' %}">Form for sellers</a></li>
+            </ul>
+
+            <h2>Category</h2>
+            <ul>
+                {% for category in categories %}
+                <li><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <main>
+
+             {% if user.is_authenticated %}
+                <div class="user-container" style="margin-top: 130px;">
+                    <img src="{% static 'image/account_r_2.png' %}" alt="img" style="width: 130px;">
+                    <h2 class="account-user">{{ user.username }}</h2>
+                    <h3 class="account-info"><i>Name: </i>{{ user.first_name }}</h3>
+                    <h3 class="account-info"><i>Surname: </i>{{ user.last_name }}</h3>
+                    <h3 class="account-info"><i>Email: </i>{{ user.email }}</h3>
+                    <div class="back-container-logo">
+                        <a href="{% url 'logout' %}"><button style="margin-top: 10px;" class="back-button">Вийти</button></a>
+                    </div>
+                </div>
+
+            {% else %}
+                <h2>Please log in.</h2>
+            {% endif %}
+
+        </main>
+    </div>
+</body>
+</html>

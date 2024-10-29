@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiktY</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-color: #85111c;">
+    {% block content %}
+    <div class="regusr-container">
+        <h2>Registration</h2>
+        <form method="post" class="regusr-form">
+            {% csrf_token %}
+
+            <label for="{{ form.username.id_for_label }}" class="regusr-label">Username:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="regusr-error">{{ form.username.errors }}</div>
+            {% endif %}
+
+            <label for="{{ form.first_name.id_for_label }}" class="regusr-label">First name:</label>
+            {{ form.first_name }}
+            {% if form.first_name.errors %}
+                <div class="regusr-error">{{ form.first_name.errors }}</div>
+            {% endif %}
+
+            <label for="{{ form.last_name.id_for_label }}" class="regusr-label">Last name:</label>
+            {{ form.last_name }}
+            {% if form.last_name.errors %}
+                <div class="regusr-error">{{ form.last_name.errors }}</div>
+            {% endif %}
+
+            <label for="{{ form.email.id_for_label }}" class="regusr-label">Email address:</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="regusr-error">{{ form.email.errors }}</div>
+            {% endif %}
+
+            <label for="{{ form.password.id_for_label }}" class="regusr-label">Password:</label>
+            {{ form.password }}
+            {% if form.password.errors %}
+                <div class="regusr-error">{{ form.password.errors }}</div>
+            {% endif %}
+
+            <button type="submit" class="regusr-submit">Sign up</button>
+        </form>
+        <p>If you already have an account, <a href="{% url 'login' %}" class="regusr-login-link">log in</a></p>
+    </div>
+    {% endblock %}
+</body>
+</html>

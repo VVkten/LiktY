@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form LiktY</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'image/logo.png' %}" alt="Logo img">
+            <h1><a href="{% url 'home' %}" style="text-decoration: none; color: black;">LiktY</a></h1>
+        </div>
+        <div class="account">
+            <a href="{% url 'shopping_cart' %}"><img src="{% static 'image/free-icon-font-shopping-cart (2).png' %}" alt="account" style="width: 30px;"></a>
+            <a href="{% url 'account' %}"><img src="{% static 'image/user (1).png' %}" alt="account" style="width: 30px; margin-left: 5px;"></a>
+        </div>
+    </header>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="{% url 'about_us' %}">About us</a></li>
+                <li><a href="{% url 'from_sellers' %}">Form for sellers</a></li>
+            </ul>
+
+            <h2>Category</h2>
+            <ul>
+                {% for category in categories %}
+                <li><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <main>
+            <div class="order-container">
+                <h2 style="text-align: center;">Form for selling goods</h2>
+                <p style="text-align: center;">Your form will be processed within two business days.</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <label for="first-name">Name:</label>
+                        <input type="text" id="first-name" name="first_name" required placeholder="Your name">
+
+                        <label for="last-name">Surname:</label>
+                        <input type="text" id="last-name" name="last_name" required placeholder="Your surname">
+
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Your work phone number">
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required placeholder="Your work email">
+
+                        <label for="comment">Comment:</label>
+                        <textarea id="comment" name="comment" placeholder="Briefly describe the product and your wishes for cooperation"></textarea>
+
+                        <label>
+                            <input type="radio" name="radio" checked> I consent to the processing of my personal data
+                        </label>
+
+                        <button type="submit" style="margin-left: 130px; margin-top: 5px; font-size: 16px;">Sent</button>
+                    </form>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

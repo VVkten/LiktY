@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiktY</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body style="background-color: #85111c;">
+    <div class="logo-container" style="margin-top: 70px;">
+        {% if request.user.is_authenticated %}
+            <p>Вітаємо, {{ request.user.username }}!</p>
+            <a href="{% url 'logout' %}">Вийти</a>
+        {% else %}
+            <h2>Login</h2>
+            <form method="post" class="logo-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="logo-submit">Log in</button>
+            </form>
+            <p>If you do not have an account,<a href="{% url 'register' %}" class="logo-login-link"> create one.</a></p>
+        {% endif %}
+    </div>
+</body>
+</html>

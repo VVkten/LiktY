@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'image/logo.png' %}" alt="Logo img">
+            <h1><a href="{% url 'home' %}" style="text-decoration: none; color: black;">LiktY</a></h1>
+        </div>
+         <div class="account">
+            <a href="{% url 'shopping_cart' %}"><img src="{% static 'image/free-icon-font-shopping-cart (2).png' %}" alt="account" style="width: 30px;"></a>
+            <a href="{% url 'account' %}"><img src="{% static 'image/user (1).png' %}" alt="account" style="width: 30px; margin-left: 5px;"></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="{% url 'about_us' %}">About us</a></li>
+                <li><a href="{% url 'from_sellers' %}">Form for sellers</a></li>
+            </ul>
+
+            <h2>Category</h2>
+            <ul>
+                {% for category in categories %}
+                <li><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <main>
+            <div class="title-about">
+                <h2>About us</h2>
+                <p>Create with love – choose with soul!</p>
+             </div>
+
+            <div class="content-container">
+                <div class="image-left">
+                    <img src="{% static 'image/kelly-sikkema-4LjWS2TtmEk-unsplash.jpg' %}" alt="Image Left">
+                </div>
+                <div class="text-right">
+                    <h2>Our Mission</h2>
+                    <p>Our company aims to create a platform for selling unique handmade products crafted by talented artisans. We believe in the importance of supporting local artists and providing them with the opportunity to share their creations with a wider audience. <br> <br>Our mission is to promote handmade culture and create a space where everyone can find something special.</p>
+                </div>
+            </div>
+
+            <div class="content-container reverse">
+                <div class="image-right">
+                    <img src="{% static 'image/mask_textur.jpg' %}" alt="Image Right">
+                </div>
+                <div class="text-left">
+                    <h2>What We Offer</h2>
+                    <p>In our assortment, you will find a variety of products, from stylish accessories to original home decor. <br><br>Each item is handcrafted with love and attention to detail, making it unique. We carefully select our products to ensure their high quality and aesthetic appeal.</p>
+                </div>
+            </div>
+
+            <div class="content-container">
+                <div class="image-left">
+                    <img src="{% static 'image/smile_textur.jpg' %}" alt="Image Left">
+                </div>
+                <div class="text-right">
+                    <h2>Why Choose Us</h2>
+                    <p>Support Local Artisans: Your purchase helps talented artists realize their dreams and ensures their financial independence.
+                        <br><br>Unique Products: Each item is not just a product but a story behind it. You can be confident that when you buy from us, you are getting something truly special.
+                        <br><br>Service and Support: Our team is always ready to assist you with your selection, answer your questions, and provide guidance. We value our customers and strive to deliver the best service possible.</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin: 10px; margin-top: 5px;">Hotline Number: <span style="color: rgb(200, 36, 36);">+0 846 2763 764</span> Available Hours: Monday to Friday, 9 AM to 6 PM
+                <br>Email Address: <span style="color: rgb(200, 36, 36);">likyHotLine@gmail.com</span> Response Time: We aim to reply to all inquiries within 24 hours.</p>
+        </main>
+    </div>
+</body>
+</html>

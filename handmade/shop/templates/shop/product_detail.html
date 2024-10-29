@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiktY</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="{% static 'image/logo.png' %}" alt="Logo img">
+            <h1><a href="{% url 'home' %}" style="text-decoration: none; color: black;">LiktY</a></h1>
+        </div>
+         <div class="account">
+            <a href="{% url 'shopping_cart' %}"><img src="{% static 'image/free-icon-font-shopping-cart (2).png' %}" alt="account" style="width: 30px;"></a>
+            <a href="{% url 'account' %}"><img src="{% static 'image/user (1).png' %}" alt="account" style="width: 30px; margin-left: 5px;"></a>
+        </div>
+    </header>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="{% url 'about_us' %}">About us</a></li>
+                <li><a href="{% url 'from_sellers' %}">Form for sellers</a></li>
+            </ul>
+
+            <h2>Category</h2>
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <main>
+
+            <!-- тут -->
+            <div class="back-container" style="margin-top: 90px;">
+                <!-- Кнопка повернення назад -->
+                <a href="javascript:history.back()" class="back-button">Назад</a>
+            </div>
+
+            <div class="product-card">
+                <div class="right">
+                    <img src="{{ product.photo.url }}" alt="{{ product.name }}" class="product-image">
+                    <h2>{{ product.name }}</h2>
+                    <div class="product-description">
+                        <p>{{ product.description }}</p>
+                    </div>
+                </div>
+
+                <div class="left">
+                    <div class="author-info">
+                        <h3>Information about the author</h3>
+                        <p>Name: {{ product.author.name }} {{ product.author.last_name }}</p>
+                        <p>Email: {{ product.author.email }}</p>
+                        <div class="purchase-info-2">
+                            <p>Status: {{ product.status }}</p>
+                            <p>Availability {{ product.quantity }} pcs</p>
+                        </div>
+                        <div class="purchase-info">
+                            <button onclick="addToCart({{ product.id }}); event.stopPropagation();">Buy</button>
+                            <p>{{ product.price }} $</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+<script src="{% static 'script/script.js' %}"></script>
+</body>
+</html>
