@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiktY</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="{% static 'image/logo.png' %}" alt="Logo img">
-            <h1><a href="{% url 'home' %}" style="text-decoration: none; color: black;">LiktY</a></h1>
-        </div>
-         <div class="account">
-            <a href="{% url 'shopping_cart' %}"><img src="{% static 'image/free-icon-font-shopping-cart (2).png' %}" alt="account" style="width: 30px;"></a>
-            <a href="{% url 'account' %}"><img src="{% static 'image/user (1).png' %}" alt="account" style="width: 30px; margin-left: 5px;"></a>
-        </div>
-    </header>
-    <div class="container">
-        <nav class="sidebar">
-            <h2>Navigation</h2>
-            <ul>
-                <li><a href="{% url 'about_us' %}">About us</a></li>
-                <li><a href="{% url 'from_sellers' %}">Form for sellers</a></li>
-            </ul>
+{% extends 'shop/base.html' %}
 
-            <h2>Category</h2>
-            <ul>
-                {% for category in categories %}
-                    <li><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
-        <main>
+{% load static %}
+
+{% block content %}
+
+         <main>
             <div class="title-category">
                 <h2>{{ category.name }}</h2>
                <p style="width: 600px;">{{ category.description }}</p>
@@ -55,7 +26,4 @@
             </div>
 
         </main>
-    </div>
-<script src="{% static 'script/script.js' %}"></script>
-</body>
-</html>
+{% endblock %}

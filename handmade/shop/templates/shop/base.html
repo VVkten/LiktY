@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header>
+        <div class="logo">
+            <img src="{% static 'image/logo.png' %}" alt="Logo img">
+            <h1><a href="{% url 'home' %}" style="text-decoration: none; color: black;">LiktY</a></h1>
+        </div>
+         <div class="account">
+<!--            <a href="{% url 'shopping_cart' %}"><img src="{% static 'image/free-icon-font-shopping-cart (2).png' %}" alt="account" style="width: 30px;"></a>-->
+             <a href="{% url 'shopping_cart' %}">
+             {% if cart_items.count > 0 %}
+                <img src="{% static 'image/shopping-cart_full.png' %}" alt="Shopping Cart" style="width: 30px;">
+            {% else %}
+                 <img src="{% static 'image/shopping-cart.png' %}" alt="Shopping Cart" style="width: 30px;">
+            {% endif %}
+
+             </a>
+
+
+            <a href="{% url 'account' %}"><img src="{% static 'image/user (1).png' %}" alt="account" style="width: 30px; margin-left: 5px;"></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="{% url 'about_us' %}">About us</a></li>
+                <li><a href="{% url 'from_sellers' %}">Form for sellers</a></li>
+            </ul>
+
+            <h2>Category</h2>
+            <ul>
+                {% for category in categories %}
+                <li><a href="{% url 'category_detail' category.id %}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+{% block content %}{% endblock %}
+        </div>
+    <script src="{% static 'script/script.js' %}"></script>
+</body>
+</html>

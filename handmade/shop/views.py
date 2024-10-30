@@ -14,7 +14,7 @@ from decimal import Decimal
 def order(request):
     user = request.user
     categories = Category.objects.all()
-    return render(request, 'shop/order.html',{'user': user, 'categories': categories})
+    return render(request, 'shop/order.html', {'user': user, 'categories': categories})
 
 @login_required
 def order_form(request):
@@ -43,9 +43,9 @@ def order_form(request):
             order.save()
             items.delete()
 
-            return JsonResponse({'status': 'success', 'message': 'Замовлення успішно оформлене.'})
+            return JsonResponse({'status': 'success', 'message': 'The order has been successfully placed.'})
         except json.JSONDecodeError:
-            return JsonResponse({'status': 'error', 'message': 'Невірний формат даних.'})
+            return JsonResponse({'status': 'error', 'message': 'Invalid data format.'})
     return render(request, 'shop/success.html')
 
 def shopping_cart(request):
@@ -119,7 +119,7 @@ def register(request):
                 password=form.cleaned_data['password'],
                 email=form.cleaned_data['email'],
             )
-            messages.success(request, "Реєстрація успішна! Ви можете увійти.")
+            messages.success(request, "Registration is successful! You can enter.")
             return redirect('login')
     else:
         form = RegistrationForm()
@@ -133,17 +133,19 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            messages.success(request, "Вітаємо! Ви увійшли в систему.")
+            messages.success(request, "You are logged in!")
             return redirect('home')
         else:
-            messages.error(request, "Неправильний логін або пароль.")
+            messages.error(request, "Incorrect login or password.")
     form = LoginForm()
     return render(request, 'shop/logo.html', {'form': form})
 
 def home(request):
+    user = request.user
+    cart_items = Cart.objects.filter(user=user)
     products = Product.objects.all()
     categories = Category.objects.all()
-    return render(request, 'shop/home.html', {'products': products, 'categories': categories})
+    return render(request, 'shop/home.html', {'products': products, 'categories': categories, 'cart_items': cart_items})
 
 def category_detail(request, category_id):
     category = get_object_or_404(Category, id=category_id)

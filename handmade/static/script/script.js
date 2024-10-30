@@ -140,9 +140,11 @@ function addToCart(productId) {
     .then(data => {
         console.log(data);
         if (data.status === 'success') {
+            location.reload();
             alert(data.message);
         } else {
             alert(data.message);
+            location.reload();
         }
     })
     .catch(error => {
