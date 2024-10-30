@@ -13,17 +13,13 @@
             <h1><a href="{% url 'home' %}" style="text-decoration: none; color: black;">LiktY</a></h1>
         </div>
          <div class="account">
-<!--            <a href="{% url 'shopping_cart' %}"><img src="{% static 'image/free-icon-font-shopping-cart (2).png' %}" alt="account" style="width: 30px;"></a>-->
              <a href="{% url 'shopping_cart' %}">
              {% if cart_items.count > 0 %}
                 <img src="{% static 'image/shopping-cart_full.png' %}" alt="Shopping Cart" style="width: 30px;">
             {% else %}
                  <img src="{% static 'image/shopping-cart.png' %}" alt="Shopping Cart" style="width: 30px;">
             {% endif %}
-
              </a>
-
-
             <a href="{% url 'account' %}"><img src="{% static 'image/user (1).png' %}" alt="account" style="width: 30px; margin-left: 5px;"></a>
         </div>
     </header>
