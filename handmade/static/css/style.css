@@ -333,7 +333,7 @@ main {
 }
 
 .but-prc {
-    z-index: 3;
+    z-index: 1;
     display: flex;
     justify-content: space-evenly;
     width: 100%;
@@ -688,6 +688,16 @@ p {
 
 .buy-button:hover {
     background-color: var(--button-hover-bg);
+}
+
+.buy-button_dis {
+    color: var(--button-text-color);
+    background-color: #64030c;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 /* ACCOUNT */

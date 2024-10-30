@@ -10,10 +10,15 @@
 <body style="background-color: #85111c;">
     <div class="logo-container" style="margin-top: 70px;">
         {% if request.user.is_authenticated %}
-            <p>Вітаємо, {{ request.user.username }}!</p>
-            <a href="{% url 'logout' %}">Вийти</a>
+            <p>Hello, {{ request.user.username }}!</p>
+            <a href="{% url 'logout' %}">Log out</a>
         {% else %}
             <h2>Login</h2>
+           {% for message in messages %}
+                <div class="alert {{ message.tags }}" id="message-{{ forloop.counter }}" style="color: rgb(157, 27, 27);">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <form method="post" class="logo-form">
                 {% csrf_token %}
                 {{ form.as_p }}
@@ -22,5 +27,19 @@
             <p>If you do not have an account,<a href="{% url 'register' %}" class="logo-login-link"> create one.</a></p>
         {% endif %}
     </div>
+<script>
+    // Приховати повідомлення через 3 секунди
+    document.addEventListener('DOMContentLoaded', function() {
+        const messages = document.querySelectorAll('[id^="message-"]');
+        messages.forEach((message) => {
+            setTimeout(() => {
+                message.style.opacity = '0';
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 600);
+            }, 3000);
+        });
+    });
+</script>
 </body>
 </html>

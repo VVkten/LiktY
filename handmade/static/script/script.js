@@ -60,6 +60,8 @@ if (buyButton) {
     });
 }
 
+let message = "Your form has been submitted successfully!";
+
 if (orderForm) {
     orderForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -68,7 +70,7 @@ if (orderForm) {
         const selectedItems_cart = storedItems ? JSON.parse(storedItems) : [];
 
         if (selectedItems_cart.length === 0) {
-            alert("Виберіть хоча б один товар для замовлення.");
+            alert("Choose at least one product to order.");
             return;
         }
 
@@ -93,6 +95,7 @@ if (orderForm) {
         .then(data => {
             if (data.status === 'success') {
                 localStorage.removeItem('selectedItems_cart');
+                window.alert(message);
                 window.location.href = `/success/`;
             } else {
                 alert(data.message);

@@ -60,8 +60,13 @@
             <div class="total">
                 <h3>Total amount: <span id="totalPrice">0</span> $</h3>
             </div>
-            <button class="buy-button" id="buyButton">Buy</button>
-        </div>
+            <!-- Використовуємо умову для активації кнопки -->
+                {% if cart_items %}
+                <button class="buy-button" id="buyButton">Buy</button>
+                {% else %}
+                <button class="buy-button_dis" disabled>Buy</button>
+                {% endif %}
+            </div>
 
         </main>
 

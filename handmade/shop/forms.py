@@ -25,20 +25,20 @@ class RegistrationForm(forms.ModelForm):
 
         error_messages = {
             'username': {
-                'required': 'Це поле обов\'язкове.',
-                'max_length': 'Максимальна кількість символів — 150.',
+                'required': 'This field is required',
+                'max_length': 'The maximum number of characters is 150.',
             },
             'first_name': {
-                'required': 'Це поле обов\'язкове.',
+                'required': 'This field is required',
             },
             'last_name': {
-                'required': 'Це поле обов\'язкове.',
+                'required': 'This field is required',
             },
             'email': {
-                'required': 'Це поле обов\'язкове.',
+                'required': 'This field is required',
             },
             'password': {
-                'required': 'Це поле обов\'язкове.',
+                'required': 'This field is required',
             },
         }
     def save(self, commit=True):

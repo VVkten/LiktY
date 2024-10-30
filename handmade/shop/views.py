@@ -24,19 +24,16 @@ def order_form(request):
 
         try:
             items = Cart.objects.filter(user=request.user)
-
             if not items.exists():
                 return JsonResponse({'status': 'error', 'message': 'Кошик порожній.'})
 
             data = json.loads(body_data) if body_data else {}
             address = data.get('shipping_address')
             postal_code = data.get('city_postal_code')
-
             order = Order(user=request.user, shipping_address=address, city_postal_code=postal_code)
             order.save()
 
             total_price = Decimal('0.00')
-
             for item in items:
                 order_item = OrderItem(order=order, product=item.product, quantity=item.quantity, price=item.price)
                 order_item.save()
@@ -44,14 +41,11 @@ def order_form(request):
 
             order.total_price = total_price
             order.save()
-
             items.delete()
 
             return JsonResponse({'status': 'success', 'message': 'Замовлення успішно оформлене.'})
-
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': 'Невірний формат даних.'})
-
     return render(request, 'shop/success.html')
 
 def shopping_cart(request):
@@ -103,7 +97,6 @@ def remove_from_cart(request):
 
     return JsonResponse({'status': 'error', 'message': 'Something went wrong'})
 
-
 @login_required
 def account(request):
     categories = Category.objects.all()
@@ -112,7 +105,7 @@ def account(request):
 
 def user_logout(request):
     logout(request)
-    messages.success(request, "Ви вийшли з системи.")
+    messages.success(request, "You are logged out!")
     return redirect('login')
 
 def register(request):
