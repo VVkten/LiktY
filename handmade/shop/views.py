@@ -148,19 +148,25 @@ def home(request):
     return render(request, 'shop/home.html', {'products': products, 'categories': categories, 'cart_items': cart_items})
 
 def category_detail(request, category_id):
+    user = request.user
+    cart_items = Cart.objects.filter(user=user)
     category = get_object_or_404(Category, id=category_id)
     products = Product.objects.filter(category=category)
     categories = Category.objects.all()
-    return render(request, 'shop/category.html', {'category': category, 'products': products, 'categories': categories})
+    return render(request, 'shop/category.html', {'category': category, 'products': products, 'categories': categories, 'cart_items': cart_items})
 
 def product_detail(request, product_id):
+    user = request.user
+    cart_items = Cart.objects.filter(user=user)
     product = get_object_or_404(Product, id=product_id)
     categories = Category.objects.all()
-    return render(request, 'shop/product_detail.html', {'product': product, 'categories': categories})
+    return render(request, 'shop/product_detail.html', {'product': product, 'categories': categories, 'cart_items': cart_items})
 
 def about_us(request):
+    user = request.user
+    cart_items = Cart.objects.filter(user=user)
     categories = Category.objects.all()
-    return render(request, 'shop/about_us.html', {'categories': categories})
+    return render(request, 'shop/about_us.html', {'categories': categories, 'cart_items': cart_items})
 
 def from_sellers(request):
     if request.method == 'POST':
@@ -170,13 +176,17 @@ def from_sellers(request):
             return redirect('success')
     else:
         form = SellerForm()
+    user = request.user
+    cart_items = Cart.objects.filter(user=user)
     categories = Category.objects.all()
-    return render(request, 'shop/from_sellers.html', {'categories': categories, 'form': form})
+    return render(request, 'shop/from_sellers.html', {'categories': categories, 'cart_items': cart_items, 'form': form})
 
 def success_view(request):
+    user = request.user
+    cart_items = Cart.objects.filter(user=user)
     products = Product.objects.all()
     categories = Category.objects.all()
-    return render(request, 'shop/home.html', {'products': products, 'categories': categories})
+    return render(request, 'shop/home.html', {'products': products, 'categories': categories, 'cart_items': cart_items})
 
 
 
